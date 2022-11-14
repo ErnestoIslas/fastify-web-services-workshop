@@ -1,0 +1,13 @@
+{
+  "name": "2.1_http_server",
+  "version": "1.0.0",
+  "description": "Creating a web server with Node Core",
+  "main": "index.js",
+  "scripts": {
+    "routes": "node routes",
+    "server": "node server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ernesto Islas <isc.ernesto.islas@gmail.com>",
+  "license": "ISC"
+}
