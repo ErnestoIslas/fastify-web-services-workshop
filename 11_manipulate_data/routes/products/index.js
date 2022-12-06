@@ -9,6 +9,22 @@ module.exports = async (fastify) => {
     });
   });
 
+  fastify.get('/:id', (request, reply) => {
+    const { id } = request.params;
+
+    fastify.database.read(id, (error, product) => {
+      if (error) {
+        if (error.message === 'not found') {
+          reply.notFound();
+        } else {
+          reply.send(error);
+        }
+      } else {
+        reply.send(product);
+      }
+    });
+  });
+
   fastify.post('/', (request, reply) => {
     const { data } = request.body;
     const uid = fastify.database.uid();
@@ -22,22 +38,6 @@ module.exports = async (fastify) => {
       } else {
         reply.code(201);
         reply.send({ uid });
-      }
-    });
-  });
-
-  fastify.get('/:id', (request, reply) => {
-    const { id } = request.params;
-
-    fastify.database.read(id, (error, product) => {
-      if (error) {
-        if (error.message === 'not found') {
-          reply.notFound();
-        } else {
-          reply.send(error);
-        }
-      } else {
-        reply.send(product);
       }
     });
   });
